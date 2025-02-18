@@ -17,6 +17,18 @@ export default function RootLayout({
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
           {children}
+          <footer className="px-4 py-2 text-sm md:px-24 md:py-8">
+            <p>
+              Commands Catalogue by Marcus Harvey.{" "}
+              <a
+                className="underline"
+                href="https://github.com/marcusleonas/command-catalogue"
+              >
+                Source Code
+              </a>
+              .
+            </p>
+          </footer>
           <Toaster />
         </body>
       </html>
