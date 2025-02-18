@@ -1,5 +1,6 @@
 import { Button } from "~/components/ui/button";
 import { auth, signOut } from "~/server/auth";
+import { AddForm } from "./_components/add-form";
 
 export default async function HomePage() {
   const session = await auth();
@@ -26,7 +27,7 @@ export default async function HomePage() {
           </div>
         </div>
         <div>
-          <Button>Add New</Button>
+          <AddForm />
         </div>
       </div>
     </main>
