@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import AuthRedirect from "~/components/auth-redirect";
+import { Toaster } from "~/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -16,7 +17,10 @@ export default function RootLayout({
   return (
     <AuthRedirect>
       <html lang="en" className={`${GeistSans.variable}`}>
-        <body>{children}</body>
+        <body>
+          {children}
+          <Toaster />
+        </body>
       </html>
     </AuthRedirect>
   );
