@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { Trash } from "lucide-react";
 import { DeleteButton } from "~/components/delete-button";
 import { SearchBox } from "./_components/search";
+import { EditForm } from "./_components/edit-form";
 
 export default async function HomePage(props: {
   searchParams?: Promise<{
@@ -63,9 +64,16 @@ export default async function HomePage(props: {
               <p>{command.command}</p> <CopyButton text={command.command} />
             </div>
             <hr className="py-1 md:hidden" />
-            <div className="itens-center inline-flex justify-between">
+            <div className="inline-flex items-center justify-between">
               <p>{command.description}</p>
-              <DeleteButton commandId={command.id} />
+              <div className="inline-flex h-full items-center gap-1">
+                <EditForm
+                  commandId={command.id}
+                  command={command.command}
+                  description={command.description ?? ""}
+                />
+                <DeleteButton commandId={command.id} />
+              </div>
             </div>
           </div>
         ))}

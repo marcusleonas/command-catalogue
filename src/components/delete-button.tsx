@@ -20,7 +20,7 @@ export function DeleteButton({ commandId }: { commandId: number }) {
         }
       }}
     >
-      <button type="submit">
+      <button type="submit" className="flex items-center">
         <Trash size={20} />
       </button>
     </form>
