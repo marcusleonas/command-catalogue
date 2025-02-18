@@ -2,13 +2,12 @@ import { auth, signOut } from "~/server/auth";
 import { AddForm } from "./_components/add-form";
 import { db } from "~/server/db";
 import { CopyButton } from "~/components/copy-button";
-import { eq } from "drizzle-orm";
-import { commands } from "~/server/db/schema";
-import { redirect } from "next/navigation";
-import { Trash } from "lucide-react";
 import { DeleteButton } from "~/components/delete-button";
 import { SearchBox } from "./_components/search";
 import { EditForm } from "./_components/edit-form";
+import { env } from "~/env";
+import { Button } from "~/components/ui/button";
+import Link from "next/link";
 
 export default async function HomePage(props: {
   searchParams?: Promise<{
@@ -49,8 +48,13 @@ export default async function HomePage(props: {
             </form>
           </div>
         </div>
-        <div className="w-full md:w-max">
+        <div className="flex w-full flex-col gap-2 md:w-max md:flex-row">
           <AddForm />
+          {session.user.email === env.ADMIN_EMAIL && (
+            <Button asChild>
+              <Link href={"/admin"}>Admin Panel</Link>
+            </Button>
+          )}
         </div>
       </div>
       <div className="flex flex-col gap-2 pt-4">
