@@ -35,7 +35,7 @@ export default async function Page() {
       <section className="pt-4">
         <h2 className="text-2xl font-semibold">Commands</h2>
         <div className="flex flex-col gap-1">
-          <p>Total Users: {allCommands.length}</p>
+          <p>Total Commands: {allCommands.length}</p>
           {allCommands.map((command) => (
             <div
               key={command.id}
