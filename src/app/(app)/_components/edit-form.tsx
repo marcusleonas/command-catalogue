@@ -26,7 +26,6 @@ export function EditForm({
   description: string;
 }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   async function formAction(formData: FormData) {
     console.log("form submitted");
@@ -46,7 +45,7 @@ export function EditForm({
         title: res.message,
       });
       setOpen(false);
-      router.push("/");
+      window.location.reload();
     }
   }
 

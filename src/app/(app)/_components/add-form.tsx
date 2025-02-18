@@ -17,7 +17,6 @@ import { useState } from "react";
 
 export function AddForm() {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   async function formAction(formData: FormData) {
     console.log("form submitted");
@@ -37,7 +36,7 @@ export function AddForm() {
         title: res.message,
       });
       setOpen(false);
-      router.push("/");
+      window.location.reload();
     }
   }
 
