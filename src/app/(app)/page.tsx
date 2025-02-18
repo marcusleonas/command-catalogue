@@ -1,6 +1,7 @@
 import { Button } from "~/components/ui/button";
 import { auth, signOut } from "~/server/auth";
 import { AddForm } from "./_components/add-form";
+import { db } from "~/server/db";
 
 export default async function HomePage() {
   const session = await auth();
@@ -8,6 +9,10 @@ export default async function HomePage() {
   if (!session) {
     return;
   }
+
+  const commands = await db.query.commands.findMany({
+    where: (t, { eq }) => eq(t.ownerId, session.user.id),
+  });
 
   return (
     <main className="px-24 py-8">
@@ -30,6 +35,7 @@ export default async function HomePage() {
           <AddForm />
         </div>
       </div>
+      <div>{JSON.stringify(commands)}</div>
     </main>
   );
 }

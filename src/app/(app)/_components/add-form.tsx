@@ -10,14 +10,39 @@ import {
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { handleAddForm } from "./actions";
+import { toast } from "~/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function AddForm() {
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
   async function formAction(formData: FormData) {
     console.log("form submitted");
+    const res = await handleAddForm(formData);
+
+    if (!res.success) {
+      toast({
+        title: "Something went wrong!",
+        description: res.message,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (res.success) {
+      toast({
+        title: res.message,
+      });
+      setOpen(false);
+      router.push("/");
+    }
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>Add New</Button>
       </DialogTrigger>
@@ -28,7 +53,12 @@ export function AddForm() {
         <form action={formAction} className="space-y-4">
           <div>
             <Label htmlFor="command">Command</Label>
-            <Input type="text" name="command" placeholder="git add -A" />
+            <Input
+              type="text"
+              name="command"
+              placeholder="git add -A"
+              required
+            />
           </div>
 
           <div>
@@ -37,6 +67,7 @@ export function AddForm() {
               type="text"
               name="description"
               placeholder="Stages all unstaged files"
+              required
             />
           </div>
 
