@@ -48,7 +48,7 @@ export const commands = createTable("command", {
   description: text("description"),
 
   ownerId: varchar("owner_id", { length: 255 })
-    .references(() => users.id)
+    .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
 });
 
