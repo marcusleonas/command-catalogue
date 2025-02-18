@@ -7,17 +7,29 @@ import { commands } from "~/server/db/schema";
 import { redirect } from "next/navigation";
 import { Trash } from "lucide-react";
 import { DeleteButton } from "~/components/delete-button";
+import { SearchBox } from "./_components/search";
 
-export default async function HomePage() {
+export default async function HomePage(props: {
+  searchParams?: Promise<{
+    q?: string;
+  }>;
+}) {
   const session = await auth();
 
   if (!session) {
     return;
   }
 
+  const searchParams = await props.searchParams;
+  const query = searchParams?.q ?? "";
+
   const userCommands = await db.query.commands.findMany({
     where: (t, { eq }) => eq(t.ownerId, session.user.id),
   });
+
+  const filteredCommands = userCommands.filter(
+    (c) => c.command.includes(query) || c.description?.includes(query),
+  );
 
   return (
     <main className="px-4 py-2 md:px-24 md:py-8">
@@ -41,7 +53,8 @@ export default async function HomePage() {
         </div>
       </div>
       <div className="flex flex-col gap-2 pt-4">
-        {userCommands.map((command) => (
+        <SearchBox placeholder="Filter by command or description..." />
+        {filteredCommands.map((command) => (
           <div
             key={command.id}
             className="grid grid-cols-1 gap-1 rounded bg-neutral-100 p-2 md:grid-cols-2"
@@ -56,6 +69,10 @@ export default async function HomePage() {
             </div>
           </div>
         ))}
+
+        <small className="text-xs">
+          Showing {filteredCommands.length.toString()} results.
+        </small>
 
         {userCommands.length === 0 && (
           <div className="flex w-full items-center justify-center p-4">
