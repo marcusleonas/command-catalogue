@@ -41,7 +41,7 @@ export default async function Page() {
               <p>{user.id}</p>
               <p>{user.email}</p>
               <p>{user.name}</p>
-              <div>
+              <div className="flex justify-end">
                 {user.id !== session.user.id && <DeleteUser userId={user.id} />}
               </div>
             </div>
