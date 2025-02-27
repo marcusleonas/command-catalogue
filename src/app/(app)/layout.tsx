@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <PlausibleProvider
       domain="commands.flvffy.top"
-      customDomain="https://plausible.flvffy.top/js/script.js"
+      customDomain="https://plausible.flvffy.top"
     >
       <AuthRedirect>
         <html lang="en" className={`${GeistSans.variable}`}>
