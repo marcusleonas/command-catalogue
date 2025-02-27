@@ -14,6 +14,7 @@ import { mutate } from "./actions";
 import { toast } from "~/hooks/use-toast";
 import { useState } from "react";
 import { Pencil } from "lucide-react";
+import { Textarea } from "~/components/ui/textarea";
 
 export function EditForm({
   commandId,
@@ -60,7 +61,7 @@ export function EditForm({
         <form action={formAction} className="space-y-4">
           <div>
             <Label htmlFor="command">Command</Label>
-            <Input type="text" name="command" defaultValue={command} required />
+            <Textarea name="command" defaultValue={command} required />
           </div>
 
           <div>

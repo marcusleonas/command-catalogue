@@ -13,6 +13,7 @@ import { Label } from "~/components/ui/label";
 import { handleAddForm } from "./actions";
 import { toast } from "~/hooks/use-toast";
 import { useState } from "react";
+import { Textarea } from "~/components/ui/textarea";
 
 export function AddForm() {
   const [open, setOpen] = useState(false);
@@ -51,12 +52,7 @@ export function AddForm() {
         <form action={formAction} className="space-y-4">
           <div>
             <Label htmlFor="command">Command</Label>
-            <Input
-              type="text"
-              name="command"
-              placeholder="git add -A"
-              required
-            />
+            <Textarea name="command" placeholder="git add -A" required />
           </div>
 
           <div>
