@@ -31,7 +31,7 @@ export default function RootLayout({
                 >
                   Source Code
                 </a>
-                .
+                . Do not enter any sensitive information.
               </p>
             </footer>
             <Toaster />
